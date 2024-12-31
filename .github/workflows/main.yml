@@ -23,9 +23,12 @@ jobs:
         aws configure set aws_access_key_id $AWS_ACCESS_KEY_ID
         aws configure set aws_secret_access_key $AWS_SECRET_ACCESS_KEY
         aws configure set default.region $AWS_DEFAULT_REGION
-    - name: Generate SSH Key Pair
+    - name: Create ~/.ssh Directory and Add Public Key
       run: |
-        ssh-keygen -t rsa -b 4096 -C "github-actions" -f my_key -N ""
+        mkdir -p ~/.ssh
+        chmod 700 ~/.ssh
+        echo "${{ secrets.SSH_PUBLIC_KEY }}" > ~/.ssh/id_rsa.pub
+        chmod 600 ~/.ssh/id_rsa.pub
         
     - name: Run state bucket creation script
       run: |
