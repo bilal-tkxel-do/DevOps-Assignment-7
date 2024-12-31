@@ -15,6 +15,8 @@ else
   exit 1
 fi
 
+sleep 15
+
 # Deleting the S3 Bucket
 echo "Deleting the S3 Bucket..."
 aws s3api delete-bucket \
