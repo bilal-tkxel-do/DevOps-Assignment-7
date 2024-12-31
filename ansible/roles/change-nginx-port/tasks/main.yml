@@ -1,0 +1,10 @@
+---
+- name: Copy modified Nginx configuration
+  template:
+    src: nginx.conf.j2
+    dest: /etc/nginx/sites-enabled/default
+
+- name: Restart Nginx to apply changes
+  service:
+    name: nginx
+    state: restarted
